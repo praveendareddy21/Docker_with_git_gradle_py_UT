@@ -38,9 +38,14 @@ ENV PATH $PATH:$GRADLE_HOME/bin
 ENV PATH $PATH:/usr/bin
 
 RUN mkdir /app
+
+ADD test_script.py /app/test_script.py
 WORKDIR /app
 
 #ENTRYPOINT ["gradle"]
 #CMD ["-version"]
 
-ENTRYPOINT ["/bin/bash"]
+#ENTRYPOINT ["/bin/bash"]
+
+
+CMD ["python3.4", "test_script.py"]
