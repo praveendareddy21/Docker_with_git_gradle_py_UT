@@ -20,6 +20,8 @@ RUN apt-get update -y && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /var/cache/oracle-jdk8-installer
 
+RUN apt-get update && apt-get -y install git
+
 ENV MAVEN_HOME /opt/maven
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 
@@ -33,9 +35,12 @@ RUN curl -sLO https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}
 
 ENV GRADLE_HOME /usr/bin/gradle
 ENV PATH $PATH:$GRADLE_HOME/bin
+ENV PATH $PATH:/usr/bin
 
 RUN mkdir /app
 WORKDIR /app
 
-ENTRYPOINT ["gradle"]
-CMD ["-version"]
+#ENTRYPOINT ["gradle"]
+#CMD ["-version"]
+
+ENTRYPOINT ["/bin/bash"]
